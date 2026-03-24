@@ -51,6 +51,47 @@ config AIROC_WLAN_MFG_FIRMWARE
 	help
 	  Enable WLAN Manufacturing Firmware.
 
+config AIROC_WIFI_FIRMWARE_STORE_IN_FILE_SYSTEM
+	bool "Store WiFi Firmware in File System"
+	help
+	  Enable storing WiFi firmware in the file system instead of
+	  embedding it in the application binary. This can reduce flash
+	  usage and allow firmware updates without reflashing the entire
+	  application.
+
+config AIROC_WIFI_FIRMWARE_BLOB_LOCATION
+	string "WiFi Firmware Blob File Path"
+	depends on AIROC_WIFI_FIRMWARE_STORE_IN_FILE_SYSTEM
+	default "/lfs1/firmware.bin"
+	help
+	  Specify the file system path where the WiFi firmware blob is stored.
+
+config AIROC_WIFI_NVRAM_IN_FILE_SYSTEM
+	bool "Store WiFi NVRAM in File System"
+	help
+	  Enable storing WiFi NVRAM (non-volatile RAM configuration) in the
+	  file system instead of embedding it in the application binary.
+
+config AIROC_WIFI_NVRAM_BLOB_LOCATION
+	string "WiFi NVRAM Blob File Path"
+	depends on AIROC_WIFI_NVRAM_IN_FILE_SYSTEM
+	default "/lfs1/nvram.bin"
+	help
+	  Specify the file system path where the WiFi NVRAM blob is stored.
+
+config AIROC_WIFI_CLM_IN_FILE_SYSTEM
+	bool "Store WiFi CLM in File System"
+	help
+	  Enable storing WiFi CLM (Country Locale Matrix) data in the file
+	  system instead of embedding it in the application binary.
+
+config AIROC_WIFI_CLM_BLOB_LOCATION
+	string "WiFi CLM Blob File Path"
+	depends on AIROC_WIFI_CLM_IN_FILE_SYSTEM
+	default "/lfs1/clm.bin"
+	help
+	  Specify the file system path where the WiFi CLM blob is stored.
+
 config WHD_WIFI_COUNTRY
 	string "Wifi couuntry option"
 	default "WHD_COUNTRY_UNITED_STATES" if CYW55572 || CYW55500
